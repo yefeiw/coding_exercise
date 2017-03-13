@@ -1,4 +1,5 @@
-public class Solution {
+import java.util.*;
+public class PreviousPermutation{
     /**
      * @param nums: A list of integers
      * @return: A list of integers that's previous permuation
@@ -6,8 +7,8 @@ public class Solution {
     public ArrayList<Integer> previousPermuation(ArrayList<Integer> nums) {
 		// write your code
 		ArrayList<Integer> ret;//returning list of integers
-		if (null == nums || nums.empty()) {
+		if (null == nums || nums.isEmpty()) {
 			return ret;
 		}
     }
-}
+};
