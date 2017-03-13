@@ -5,9 +5,9 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
+	Input.java \
 	PreviousPermutation.java \
-	..\tst\Input.java \
-	Main.java 
+
 
 default: classes
 
