@@ -13,7 +13,7 @@ public class PreviousPermutation {
         Solution sol = new Solution();
         for (int i = 0; i < testIteration; i++) {
             input = testInput.generateRandomArrayList();
-            System.out.println("generated input size"+input.size());
+            System.out.println("generated input size"+input.size());package 
             output = sol.previousPermuation(input);
             ref = sol.previousPermuation(input);
             if(output != ref) {
