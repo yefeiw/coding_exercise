@@ -48,6 +48,7 @@ public int ref(int[] height) {
         }
         return maxarea;
     }
+}
 
 
 public class MaxArea {
@@ -59,7 +60,7 @@ public class MaxArea {
     Solution sol = new Solution();
     for (int i = 0; i < testIteration; i++) {
         int[] numbers = testInput. generateRandomArray();
-        int output = sol.threeSumClosest(numbers);
+        int output = sol.maxArea(numbers);
         int ref = sol.ref(numbers);
         if (output != ref) {
             System.out.println("Mismatch Occurred!");
@@ -76,10 +77,9 @@ public class MaxArea {
 }
 }
 /* test cases used at leetcode:
-[0,0,0]
-1
-[1,2,-1,4]
-1
-[1,2,-1,4]
--1
+[1,1]
+[1,2,3,4,5,6,7]
+[1,3,2,4,5,7,6]
+[4,1,5,2]
+[6,3,7]
 */

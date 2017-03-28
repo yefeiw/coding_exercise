@@ -26,8 +26,8 @@ public class Input {
 	//member functions to generate input.
 	public int[] generateRandomArray() {
 		Random rand = new Random();
-		int maxSize = 100;
-		int limit = 10000;
+		int maxSize = 10000;
+		int limit = 1000000;
 		int size = rand.nextInt(maxSize+1);
 		int[] ret = new int[size];//returning array of integer.
 		for (int i = 0; i < size; i++) {
