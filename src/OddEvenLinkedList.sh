@@ -1,0 +1,3 @@
+rm OddEvenLinkedList.class
+javac OddEvenLinkedList.java Input.java
+java OddEvenLinkedList
