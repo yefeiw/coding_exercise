@@ -21,9 +21,9 @@ class Solution {
                 minDiff = diff;
                 ret = cand + numbers[i];
             }
-            if (cand < target) {
+            if (cand < localTarget) {
                 left++;
-            } else if ( cand > target) {
+            } else if ( cand > localTarget) {
                 right --;
             } else {
                 //if they are equal
@@ -98,9 +98,10 @@ public class ThreeSumClosest {
 }
 }
 /* test cases used at leetcode:
-"abcabcbb"
-"76faf6c3-fef0-48e5-bc5f-b1d74d1110d3"
-""
-"c"
-"1234567890"
+[0,0,0]
+1
+[1,2,-1,4]
+1
+[1,2,-1,4]
+-1
 */

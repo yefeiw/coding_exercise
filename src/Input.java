@@ -27,11 +27,11 @@ public class Input {
 	public int[] generateRandomArray() {
 		Random rand = new Random();
 		int maxSize = 100;
-		int limit = 100;
+		int limit = 10000;
 		int size = rand.nextInt(maxSize+1);
 		int[] ret = new int[size];//returning array of integer.
 		for (int i = 0; i < size; i++) {
-			ret[i] = rand.nextInt(limit);
+			ret[i] = -limit + 2* rand.nextInt(limit);
 		}
 		return ret;
 	}
