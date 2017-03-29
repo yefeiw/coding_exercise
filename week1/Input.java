@@ -1,14 +1,24 @@
 
 import java.util.*;
 
+
+/******* class definitions that are used in the exercies*******/
 class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int val) {
-        this.val = val;
-    }
+	int val;
+	ListNode next;
+	ListNode(int val) {
+		this.val = val;
+	}
 
 }
+class Interval {
+	int start;
+	int end;
+	Interval() { start = 0; end = 0; }
+	Interval(int s, int e) { start = s; end = e; }
+}
+
+/////////////////////////////Utility Functions/////////////////////////  
 
 //package utils;
 public class Input {
@@ -55,6 +65,20 @@ public class Input {
 		}
 		return head;
 	}
+	//member funcitons to generate input
+	public Interval[] generateRandomIntervals() {
+		int limit = 10000;
+		Random rand = new Random();
+		int size = rand.nextInt(limit)+1;
+		Interval[] ret = new Interval[size];
+		System.out.println("created interval of size" + size);
+		for ( int i = 0; i < size; i++) {
+			int start = rand.nextInt(limit+1);
+			ret[i] = new Interval(start, start + rand.nextInt(limit+1));
+		}
+		return ret;
+
+	}
 	public void printListNode(ListNode head) {
 		ListNode iter = head;
 		while (null != iter) {
@@ -62,11 +86,26 @@ public class Input {
 			System.out.print(iter.val);
 			iter = iter.next;
 		}
-					System.out.println();
+		System.out.println();
 
 	}
 	public String generateRandomString() {
 		String uuid = UUID.randomUUID().toString();
 		return uuid;
+	}
+	public String[] generateRandomStringArray() {
+		int limit = 10000;
+		String operators = "+-*/";
+		String[] ret =  new String[limit];
+		for (int i = 0; i < limit; i++) {
+			Random rand = new Random();
+			int seed = -limit + 2*rand.nextInt(limit);
+			if (seed >= 0 && seed < 4) {
+				ret[i] = operators.substring(seed,seed);
+			} else {
+				ret[i] = Integer.toString(seed);
+			}
+		}
+		return ret;
 	}
 }

@@ -1,0 +1,3 @@
+rm eraseOverlapIntervals.class
+javac eraseOverlapIntervals.java Input.java
+java eraseOverlapIntervals

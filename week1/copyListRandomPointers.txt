@@ -1,0 +1,48 @@
+//Done 2016 on leetcode, cpp 
+/**
+ * Definition for singly-linked list with a random pointer.
+ * struct RandomListNode {
+ *     int label;
+ *     RandomListNode *next, *random;
+ *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    RandomListNode *copyRandomList(RandomListNode *head) {
+        //special case:
+        if (head == NULL) return NULL;
+        map<RandomListNode *, RandomListNode *> dict;
+        RandomListNode *copyhead=NULL, *buffer=NULL,*copybuffer=NULL;
+        //first iteration: walkthrough the list.
+        //assuming there is no cycles.
+        buffer = head;
+        while(buffer) {
+            RandomListNode *curr = new RandomListNode(buffer->label);
+            if(copyhead == NULL) copyhead = curr;
+            if(copybuffer == NULL) copybuffer = curr;
+            else  {
+                copybuffer->next = curr;
+                copybuffer = copybuffer->next;
+            }
+            dict[buffer] = curr;
+            printf("dict[%p] = %p\n",buffer,dict[buffer]);
+            buffer = buffer->next;
+        }
+        printf ("ckpt\n");
+        //second iteration: walkthrough the list and look up items in the dict.
+        buffer = head;
+        copybuffer = copyhead;
+        while(buffer && copybuffer) {
+                            printf ("buffer is %p, copybuffer is %p\n", buffer, copybuffer);
+            if (buffer->random && dict.find(buffer->random) != dict.end()) {
+                copybuffer->random = dict[buffer->random];
+            }
+            buffer =  buffer->next;
+            copybuffer = copybuffer->next;
+        }
+        
+        return copyhead;
+        
+    }
+};
