@@ -1,1 +1,10 @@
 ####################  Week3 Notes #################
+HW1: Sort Frequency
+Testcases:
+"tree"
+""
+"1b2b3n3m4n5b6b6hj6j"
+Output:
+Accepted on first shot.
+
+
