@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        TreeNode successor = null;
+        while(root != null && root != p) {
+            if (p.val < root.val) {
+                successor = root;
+                root = root.left;
+            } else {
+                root = root.right;
+            }
+        }
+        //if not found
+        if (root == null) {
+            return null;
+        }
+        //if the successor is the last registered parent
+        if(root.right == null) {
+            return successor;
+        }
+        //here we know that the successor is doomed to be the leftmost child of the right subtree;
+        root = root.right;
+        while(null != root.left) {
+            root = root.left;
+        }
+        return root;
+    }
+}
+
+test cases:
+[1]
+[]
+[1,2]
+[1,#,2]
+[1,2,3,#,#,4,5]
+

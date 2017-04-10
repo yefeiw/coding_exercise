@@ -45,6 +45,13 @@ public class Input {
 		}
 		return ret;
 	}
+	public void printArray(int[] input) {
+		for(int i = 0; i < input.length; i++) {
+			if ( i > 0 ) System.out.print(",");
+			System.out.print(input[i]);
+		}
+		System.out.println();
+	}
 	public int generateRandomInt() {
 		int limit = 100;
 		Random rand = new Random();
@@ -67,7 +74,7 @@ public class Input {
 	}
 	//member funcitons to generate input
 	public Interval[] generateRandomIntervals() {
-		int limit = 10000;
+		int limit = 10;
 		Random rand = new Random();
 		int size = rand.nextInt(limit)+1;
 		Interval[] ret = new Interval[size];
@@ -78,6 +85,13 @@ public class Input {
 		}
 		return ret;
 
+	}
+
+	public void printIntervals(Interval[] intervals) {
+		for (Interval i : intervals) {
+			System.out.print(" [" + i.start + "," + i.end + "] ");
+		}
+		System.out.println();
 	}
 	public void printListNode(ListNode head) {
 		ListNode iter = head;

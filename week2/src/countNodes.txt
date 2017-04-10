@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    int ret = 0;
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        int leftheight = height(root.left);
+        int rightheight = height(root.right);
+        if (leftheight == rightheight) {
+            //left subtree must be completely full;
+            return (1 << leftheight) + countNodes(root.right);
+        } else {
+            //if right subtree is 1 less than left subtree, right subtree must be full
+            return (1<< rightheight) + countNodes(root.left);
+        }
+    }
+    int height(TreeNode root) {
+        int ret = 0;
+        while(root != null){
+            ret++;
+            root = root.left;
+        }
+        return ret;
+    }
+    
+}
+
+test cases:
+[]
+[2]
+[1,2]
+[1,2,3]
+[1,2,3,4]
+[1,2,3,4,5]

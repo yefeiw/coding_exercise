@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> ret = new ArrayList<Integer>();
+        ArrayDeque<TreeNode> queue =  new ArrayDeque<TreeNode>();
+        levelOrderTraversal(root, ret, queue);
+        return ret;
+    }
+    void levelOrderTraversal(TreeNode root, List<Integer> ret, ArrayDeque<TreeNode> queue) {
+        if(null == root) {
+            return;
+        }
+        queue.add(root);
+        while(!queue.isEmpty()) {
+            int cur_size = queue.size();
+            for(int i = 0; i < cur_size; i++){
+                TreeNode node = queue.remove();
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                if (i == cur_size -1) {
+                    //the right most node, add it to queue
+                    ret.add(node.val);
+                }
+                
+            }
+        }
+    }
+}
+
+I am pretty confident at this problem and thus I did not put any additional effort into finding test cases...
