@@ -1,9 +1,9 @@
 cd src
 #compile
-javac NumIslands.java ../../common/Input.java
+javac zigZag.java ../../common/Input.java
 cp ../../common/*.class ./
-java NumIslands
 #execute
+java zigZag 
 #cleanup
 rm *.class
 cd ..

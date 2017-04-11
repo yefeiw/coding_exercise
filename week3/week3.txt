@@ -8,3 +8,47 @@ Output:
 Accepted on first shot.
 
 
+HW3: Number of Islands I
+Very basic BFS
+Note:  Need to tell if the cell content is 1/0 or '1'/'0'. Need any test case to figure that out.
+TestCases:
+Randomized checking, see source code.
+Output:
+Accepted after 1 modifications.
+
+HW4: Populating Next Right Pointers in Each Node 
+Very basic level-order traversal
+Note: forget to add null pointer checks when pushing the nodes to the queue. Caught on any basic test cases.
+Output:
+Accepcted after 1 modification.
+
+HW5: Populatingg Next Right Pointers in Each Node II
+Same as HW4
+Output:
+Direct copy of code after judgement that it will also work. Accepted on first shot.
+
+HW6: Binary Tree Zigzag Level Order Traversal
+Level Order Traversal + List Operations.
+TestCases:
+[3,9,20,null,null,15,7]
+[1,2]
+[1,2,3,4,5,6,7,8,9]
+Output:
+Accepted on first shot.
+Note:
+DFS is also easy as is here:
+https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/#/solutions
+
+
+HW7: Sort List
+Merge sort on list
+Note: Spent much debugging time because I forgot to update left and right when dividing to sub problems.
+Testcases:
+[]
+[1]
+[2,1]
+[3,2,4,1,5,6,9,7]
+[3,2,4,1,5]
+I have also done random testing to ensure correctness.
+Output:
+Accepted on first shot (after local testing)

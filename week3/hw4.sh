@@ -1,8 +1,8 @@
 cd src
 #compile
-javac NumIslands.java ../../common/Input.java
+javac rightNode.java ../../common/Input.java
 cp ../../common/*.class ./
-java NumIslands
+java rightNode
 #execute
 #cleanup
 rm *.class

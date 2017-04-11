@@ -1,9 +1,9 @@
 cd src
 #compile
-javac NumIslands.java ../../common/Input.java
+javac sortList.java ../../common/Input.java
 cp ../../common/*.class ./
-java NumIslands
 #execute
+java sortList 
 #cleanup
 rm *.class
 cd ..

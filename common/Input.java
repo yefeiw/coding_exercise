@@ -17,7 +17,16 @@ class Interval {
 	Interval() { start = 0; end = 0; }
 	Interval(int s, int e) { start = s; end = e; }
 }
-
+class TreeLinkNode {
+      int val;
+      TreeLinkNode left, right, next;
+      TreeLinkNode(int x) { val = x; }
+ }
+class TreeNode {
+      int val;
+      TreeNode left, right;
+      TreeNode(int x) { val = x; }
+ }
 /////////////////////////////Utility Functions/////////////////////////  
 
 //package utils;
@@ -79,7 +88,7 @@ public class Input {
 		return ret;
 
 	}
-	public void printListNode(ListNode head) {
+	static public void printListNode(ListNode head) {
 		ListNode iter = head;
 		while (null != iter) {
 			if(iter != head) System.out.print("->");
@@ -113,10 +122,19 @@ public class Input {
 		char [][]ret = new char[rand.nextInt(limit)][rand.nextInt(limit)];
 		for (int i = 0; i < ret.length; i++) {
 			for (int j = 0; j < ret[0].length; j++) {
-				ret[i][j] = rand.nextChar % 2;
+				ret[i][j] = (char)(rand.nextInt() % 2);
 			}
 		}
 		return ret;
 	}
-	public void 
+	public void printMatrix(char[][] input) {
+		System.out.println("##########################");
+		for (int i = 0;i < input.length; i++) {
+			for (int j = 0; j < input[i].length; j++) {
+				System.out.printf("%d ",(int)input[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println("##########################");
+	}
 }
