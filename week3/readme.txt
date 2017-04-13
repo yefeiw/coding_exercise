@@ -7,6 +7,14 @@ Testcases:
 Output:
 Accepted on first shot.
 
+HW2: minHeap with Arrays
+Note: idea is borrowed from coursera Algorithms class and bitTiger.
+TestCases:
+Ramdon test
+Output:
+Passing random test after many bugs. 
+Note since this is a minHeap with both positive and negative numbers, memset with zero will introduce bugs.
+
 
 HW3: Number of Islands I
 Very basic BFS
@@ -52,3 +60,36 @@ Testcases:
 I have also done random testing to ensure correctness.
 Output:
 Accepted on first shot (after local testing)
+
+HW8: Largest Number
+Custom Sorting: Intuitively compare the string sum, just as they were in the final solution.
+Note: Bogged down for quite a while for removing the header nodes.
+Testcases:
+[1]
+[1,2,3,4]
+[90,18,72,36,54]
+[0,0,1,2]
+[0,0]
+I have also done random testing to ensure correctness.
+Output:
+Accepted after many trials, mainly testing the header zero removal.
+
+HW9: Course Schedule II
+Basic topological sorting
+Note: There are many advanced usages about Java in the problem that I need to rememeber.
+TestCases:
+2
+[1,0]
+4, [[1,0],[2,0],[3,1],[3,2]]
+Output:
+Accepted in the first shot
+
+HW10: Maximum Gap
+Bucket sort
+Notes:  Need special attention on the size of the buckets.
+TestCases:
+[1,2,1,1,1]
+[1]
+[]
+[1,2,4,5,3,7,2,8,0,2]
+[0,9999999]
