@@ -6,11 +6,19 @@ class MinHeap {
     private int size;   // Maximum size of the heap
     private int n;      // Number of things in heap
 
-    public MinHeap(int[] input, int num, int max)
-    { Heap = Arrays.copyOf(input,input.length);  n = num;  size = max;  buildheap(); }
+    public MinHeap(int[] input, int num, int max){ 
+        Heap = Arrays.copyOf(input,input.length);  
+        n = num;  
+        size = max;  
+        buildheap(); 
+    }
 
-    public MinHeap( int max)
-    { Heap = new int[max];  n = 0;  size = max;  Arrays.fill(Heap,Integer.MAX_VALUE);}
+    public MinHeap( int max){ 
+        Heap = new int[max];  
+        n = 0;  
+        size = max;  
+        Arrays.fill(Heap,Integer.MAX_VALUE);
+    }
 
     /** Return current size of the heap */
     public int size() { return n; }
@@ -43,8 +51,9 @@ class MinHeap {
     }
     //===================Private classes=================================//
     /** Is pos a leaf position? */
-public boolean isLeaf(int pos)
-{ return (pos >= n/2) && (pos < n); }
+    private boolean isLeaf(int pos){ 
+        return (pos >= n/2) && (pos < n); 
+    }
     /** Return position for left child of pos */
     private int leftchild(int pos) {
         assert pos < n/2 : "Position has no left child";
@@ -63,8 +72,9 @@ public boolean isLeaf(int pos)
     }
 
     /** Heapify contents of Heap */
-    private void buildheap()
-    { for (int i=n/2-1; i>=0; i--) siftdown(i); }
+    private void buildheap(){ 
+        for (int i=n/2-1; i>=0; i--) siftdown(i); 
+    }
 
 
     /** Put element in its correct place */
@@ -81,9 +91,7 @@ public boolean isLeaf(int pos)
             }
     }
     private void swap(int[] Heap, int pos1, int pos2) {
-        if (pos1 > Heap.length || pos2 > Heap.length) {
-            return;
-        }
+        assert (pos1 < Heap.length && pos2 < Heap.length) : "Index out of bounds";
         int temp = Heap[pos1];
         Heap[pos1] = Heap[pos2];
         Heap[pos2] = temp;

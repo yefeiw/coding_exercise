@@ -45,14 +45,32 @@ public class Input {
 	//member functions to generate input.
 	public int[] generateRandomArray() {
 		Random rand = new Random();
-		int maxSize = 10000;
-		int limit = 1000000;
+		int maxSize = 100;
+		int limit = 100;
 		int size = rand.nextInt(maxSize+1);
 		int[] ret = new int[size];//returning array of integer.
 		for (int i = 0; i < size; i++) {
 			ret[i] = -limit + 2* rand.nextInt(limit);
 		}
 		return ret;
+	}
+	//member functions to generate input.
+	public int[] generateRandomArray(int limit) {
+		Random rand = new Random();
+		int maxSize = limit;
+		int size = rand.nextInt(maxSize+1);
+		int[] ret = new int[size];//returning array of integer.
+		for (int i = 0; i < size; i++) {
+			ret[i] = -limit + 2* rand.nextInt(limit);
+		}
+		return ret;
+	}
+	public void printArray(int[] input) {
+		for(int i = 0; i < input.length; i++) {
+			if ( i > 0 ) System.out.print(",");
+			System.out.print(input[i]);
+		}
+		System.out.println();
 	}
 	public int generateRandomInt() {
 		int limit = 100;
@@ -123,6 +141,16 @@ public class Input {
 		for (int i = 0; i < ret.length; i++) {
 			for (int j = 0; j < ret[0].length; j++) {
 				ret[i][j] = (char)(rand.nextInt() % 2);
+			}
+		}
+		return ret;
+	}
+	public int [][] generateRandomMatrix(int limit) {
+		Random rand = new Random();
+		int [][]ret = new int[rand.nextInt(limit)][rand.nextInt(limit)];
+		for (int i = 0; i < ret.length; i++) {
+			for (int j = 0; j < ret[0].length; j++) {
+				ret[i][j] = (rand.nextInt() % limit);
 			}
 		}
 		return ret;
