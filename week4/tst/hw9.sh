@@ -1,5 +1,5 @@
 ####Only chance this line for the relevant HW code name
-HW=arithSlices
+HW=hashMap
 
 
 cd ../src
