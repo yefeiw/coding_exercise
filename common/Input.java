@@ -155,11 +155,31 @@ public class Input {
 		}
 		return ret;
 	}
+	public int [][] generateRandomMatrix(int limit, int mod) {
+		Random rand = new Random();
+		int [][]ret = new int[rand.nextInt(limit)][rand.nextInt(limit)];
+		for (int i = 0; i < ret.length; i++) {
+			for (int j = 0; j < ret[0].length; j++) {
+				ret[i][j] = Math.abs(rand.nextInt() % mod);
+			}
+		}
+		return ret;
+	}
 	public void printMatrix(char[][] input) {
 		System.out.println("##########################");
 		for (int i = 0;i < input.length; i++) {
 			for (int j = 0; j < input[i].length; j++) {
 				System.out.printf("%d ",(int)input[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println("##########################");
+	}
+	public void printMatrix(int[][] input) {
+		System.out.println("##########################");
+		for (int i = 0;i < input.length; i++) {
+			for (int j = 0; j < input[i].length; j++) {
+				System.out.printf("%d ",input[i][j]);
 			}
 			System.out.println();
 		}
