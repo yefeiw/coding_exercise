@@ -120,6 +120,17 @@ public class Input {
 		String uuid = UUID.randomUUID().toString();
 		return uuid;
 	}
+	public String generateRandomString(int limit) {
+		Random random = new Random();
+		StringBuilder sb = new StringBuilder();
+		while (sb.length() < limit) {
+			char c = (char)random.nextInt(128);
+			if (Character.isLetterOrDigit(c)) {
+				sb.append(c);
+			}  
+		}
+		return sb.toString();
+	}
 	public String[] generateRandomStringArray() {
 		int limit = 10000;
 		String operators = "+-*/";

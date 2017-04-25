@@ -18,7 +18,8 @@ class CacheNode {
 class LFUCache {
     //////////////Internal Data Structure/////////////
     HashMap <Integer, CacheNode> entries;// each cache entry and its corresponding node values.
-    LinkedHashSet<CacheNode>[] frequencyList; // record of the frequency list of each node.
+    //LinkedHashSet<CacheNode>[] frequencyList; // record of the frequency list of each node.
+    HashMap <Integer,LinkedHashSet> frequencyList;//dynamic record of the frequency list of each node.
     int minFreq;//minimum frequency of all valid entries
     int maxFreq;//maximum frequency of all valid entries
     int capacity;//total capacity
@@ -30,10 +31,7 @@ class LFUCache {
         this.capacity = capacity;
         maxFreq = capacity * 3;
         minFreq = 1;
-        frequencyList = new LinkedHashSet[maxFreq+1];
-        //furnish linkedHashSet;
-        furnishFrequencyList();
-        
+        frequencyList = new HashMap<Integer, LinkedHashSet>();
     }
     
     public int get(int key) {
@@ -48,7 +46,7 @@ class LFUCache {
     }
     
     public void put(int key, int value) {
-        //sanity check: should we every try
+        //sanity check: should we even try
         if(capacity == 0) {
             return;
         }
@@ -71,46 +69,48 @@ class LFUCache {
     //////////////////// Private Methods ///////////////////
     void increaseRank(CacheNode node) {
         int curFreq = node.freq;
-        if (curFreq == maxFreq) {
-            //make sure that is the last element in the current list
-            frequencyList[curFreq].remove(node);
-            frequencyList[curFreq].add(node);
-        } else {
-            frequencyList[curFreq].remove(node);
-            frequencyList[curFreq+1].add(node);
-        }
+        LinkedHashSet<CacheNode> curList = frequencyList.get(curFreq);
+        curList.remove(node);
+        LinkedHashSet nextList = fetchList(curFreq+1);
+        nextList.add(node);
+        node.freq++;
         //here we possibly need to update the minFreq.
-        if (curFreq == minFreq && frequencyList[curFreq].isEmpty()) {
+        if (curFreq == minFreq && frequencyList.get(curFreq).isEmpty()) {
             minFreq++;
         }
     }
 
     void removeLast() {
         //Here, we know that the minFreq is maintained so that frequencyList[minFreq] is always not null;
-        Iterator<CacheNode> it = frequencyList[minFreq].iterator();
+        LinkedHashSet<CacheNode> curList = frequencyList.get(minFreq);
+        Iterator<CacheNode> it = curList.iterator();
         CacheNode victim = it.next();
-        frequencyList[minFreq].remove(victim);
+        curList.remove(victim);
         entries.remove(victim.key);
         //here we possibly need to update the minFreq.
-        while (frequencyList[minFreq].isEmpty() && minFreq < maxFreq) {
-                    System.out.printf("searching %d\n",minFreq);
-
+        while (minFreq <= maxFreq) {
+            System.out.printf("searching %d\n",minFreq);
+            if (frequencyList.containsKey(minFreq) && !frequencyList.get(minFreq).isEmpty()) {
+                break;
+            }
             minFreq++;
         }
-        if (minFreq == maxFreq) {
+        if (minFreq > maxFreq) {
             minFreq = 1;
         }
     }
     void insertNode(CacheNode node) {
-        frequencyList[1].add(node);
+        LinkedHashSet<CacheNode> curList = fetchList(1);
+        curList.add(node);
         entries.put(node.key,node);
         //here we possibly need to update the minFreq to 1
         minFreq = Math.min(minFreq,1);
     }
-    void furnishFrequencyList() {
-        for (int i = 0;i <= maxFreq; i++) {
-            frequencyList[i] = new LinkedHashSet<CacheNode>();
+    LinkedHashSet<CacheNode> fetchList(int level) {
+        if (!frequencyList.containsKey(level)) {
+            frequencyList.put(level,new LinkedHashSet<CacheNode>());
         }
+        return frequencyList.get(level);
     }
 }
 
