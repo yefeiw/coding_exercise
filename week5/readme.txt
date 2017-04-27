@@ -58,5 +58,49 @@ Too hard to manually test, relied on leetcode.
 Output:
 Accepted on second shot, did not think through the whole data structure at first.
 
+HW6: Palindrome Permutation
+Backtrack + Math
+Note:
+1. My code is brutal backtrack, it will be correct but TLE.
+2. I cannot understand the solution easily. I am waiting for some more inputs.
+TestCase:
+Leetcode
+Output:
+TLE
+
+HW7: Group Anagrams
+HashMap
+TestCase:
+Leetcode
+Output:
+Accepted on first shot.
+
+HW8: RemoveDuplicateLetters
+Stack
+Note:
+1. We need to build a stack, that is very hard to think of.
+2. For each element in the stack, we check the following, if stack is empty, insert, if element found in the stack, continue and decrement ref. if element is smaller than stack.top(), pop until the stack.top() is the last reference, or element is now greater than stack.top()
+TestCase:
+1. Random test locally
+2. Leetcode
+Output:
+Accepted on second shot. Forgot to decrement count if element in stack in the first shot.
+
+HW9: Sort Tranformed Array
+Two Pointers + Math
+Notes:
+1. My intuitive thoughts are two naive. We don't even need to calculate -b/2a.
+2. a=0 will apply on both sides, just randomly pick one will do, instead of having a seperate case.
+TestCase:
+1. Random test locally
+2. Leetcode.
+Output: Accepted on first shot.
+
+HW10: Largest Divisible Subset
+DP
+TestCase:1
+1. Random test locally (occasional divby0 but ignorable)
+2. Leetcode.
+Output: Accepted on first shot.
 
 
