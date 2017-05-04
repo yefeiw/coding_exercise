@@ -31,9 +31,13 @@ class TreeNode {
 
 //package utils;
 public class Input {
+	//static variables;
+	Random rand;
+	public Input() {
+		rand = new Random();
+	}
 	//member functions to generate input.
 	public ArrayList<Integer> generateRandomArrayList() {
-		Random rand = new Random();
 		int maxSize = 10000;
 		int size = rand.nextInt(maxSize+1);
 		ArrayList<Integer> ret = new ArrayList<Integer>();//returning arraylist of integer.
@@ -44,7 +48,6 @@ public class Input {
 	}
 	//member functions to generate input.
 	public int[] generateRandomArray() {
-		Random rand = new Random();
 		int maxSize = 100;
 		int limit = 100;
 		int size = rand.nextInt(maxSize+1);
@@ -56,7 +59,6 @@ public class Input {
 	}
 	//member functions to generate input.
 	public int[] generateRandomArray(int limit) {
-		Random rand = new Random();
 		int maxSize = limit;
 		int size = rand.nextInt(maxSize+1);
 		int[] ret = new int[size];//returning array of integer.
@@ -74,12 +76,10 @@ public class Input {
 	}
 	public int generateRandomInt() {
 		int limit = 100;
-		Random rand = new Random(100);
 		return rand.nextInt();
 	}
 	//member funcitons to generate input
 	public ListNode generateRandomListNode() {
-		Random rand = new Random();
 		//int maxSize = 10000;
 		//small test set for manual verification
 		int maxSize = 10;
@@ -95,7 +95,6 @@ public class Input {
 	//member funcitons to generate input
 	public Interval[] generateRandomIntervals() {
 		int limit = 10000;
-		Random rand = new Random();
 		int size = rand.nextInt(limit)+1;
 		Interval[] ret = new Interval[size];
 		System.out.println("created interval of size" + size);
@@ -121,10 +120,9 @@ public class Input {
 		return uuid;
 	}
 	public String generateRandomString(int limit) {
-		Random random = new Random();
 		StringBuilder sb = new StringBuilder();
 		while (sb.length() < limit) {
-			char c = (char)random.nextInt(128);
+			char c = (char)rand.nextInt(128);
 			if (Character.isLetterOrDigit(c)) {
 				sb.append(c);
 			}  
@@ -136,7 +134,6 @@ public class Input {
 		String operators = "+-*/";
 		String[] ret =  new String[limit];
 		for (int i = 0; i < limit; i++) {
-			Random rand = new Random();
 			int seed = -limit + 2*rand.nextInt(limit);
 			if (seed >= 0 && seed < 4) {
 				ret[i] = operators.substring(seed,seed);
@@ -147,7 +144,6 @@ public class Input {
 		return ret;
 	}
 	public char [][] generateBinaryMatrix(int limit) {
-		Random rand = new Random();
 		char [][]ret = new char[rand.nextInt(limit)][rand.nextInt(limit)];
 		for (int i = 0; i < ret.length; i++) {
 			for (int j = 0; j < ret[0].length; j++) {
@@ -157,7 +153,6 @@ public class Input {
 		return ret;
 	}
 	public int [][] generateRandomMatrix(int limit) {
-		Random rand = new Random();
 		int [][]ret = new int[rand.nextInt(limit)][rand.nextInt(limit)];
 		for (int i = 0; i < ret.length; i++) {
 			for (int j = 0; j < ret[0].length; j++) {
@@ -167,7 +162,6 @@ public class Input {
 		return ret;
 	}
 	public int [][] generateRandomMatrix(int limit, int mod) {
-		Random rand = new Random();
 		int [][]ret = new int[rand.nextInt(limit)][rand.nextInt(limit)];
 		for (int i = 0; i < ret.length; i++) {
 			for (int j = 0; j < ret[0].length; j++) {
