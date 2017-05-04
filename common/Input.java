@@ -190,4 +190,17 @@ public class Input {
 		}
 		System.out.println("##########################");
 	}
+	public List<List<Integer>> generateRandom2DList(int limit) {
+		int size = rand.nextInt(limit);
+		List<List<Integer>> ret = new ArrayList<List<Integer>>();
+		for(int  i = 0; i < size; i++) {
+			List<Integer> item  = new ArrayList<Integer>();
+			int jsize = rand.nextInt(limit);
+			for(int j = 0; j < jsize; j++) {
+				item.add(rand.nextInt(limit));
+			}
+			ret.add(item);
+		}
+		return ret;
+	}
 }
