@@ -75,8 +75,10 @@ public class Input {
 		System.out.println();
 	}
 	public int generateRandomInt() {
-		int limit = 100;
 		return rand.nextInt();
+	}
+	public int generateRandomInt(int limit) {
+		return rand.nextInt(limit);
 	}
 	//member funcitons to generate input
 	public ListNode generateRandomListNode() {
