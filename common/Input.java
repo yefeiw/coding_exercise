@@ -131,6 +131,15 @@ public class Input {
 		}
 		return sb.toString();
 	}
+	public String generateRandomString(char min, char max) {
+		StringBuilder sb = new StringBuilder();
+		int limit = rand.nextInt(max - min + 1);
+		while (sb.length() < limit) {
+			char c = (char)(min + rand.nextInt(max-min+1));
+			sb.append(c);
+		}
+		return sb.toString();
+	}
 	public String[] generateRandomStringArray() {
 		int limit = 10000;
 		String operators = "+-*/";

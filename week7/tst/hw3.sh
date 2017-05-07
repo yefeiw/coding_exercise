@@ -1,5 +1,5 @@
 ####Only chance this line for the relevant HW code name
-HW=SubarraySumK
+HW=BinaryTreeFromString
 
 
 cd ../src
