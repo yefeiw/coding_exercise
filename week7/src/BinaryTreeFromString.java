@@ -1,41 +1,53 @@
 import java.util.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
+import java.io.IOException;
 
 class Solution {
-    public int subarraySum(int[] nums, int k) {
-        if (nums == null || nums.length == 0 ) {
-            return 0;
-        }
-        Map<Integer,Integer> preSum = new HashMap<Integer,Integer>();
-        preSum.put(0,-1);
-        int sum = 0;
-        int result = 0;
-        for(int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (preSum.containsKey(sum - k)) {
-                result += preSum.get(sum - k);
+    public TreeNode str2tree(String s) {
+        Stack<TreeNode> stack = new Stack<>();
+        for(int i = 0, j = i; i < s.length(); i++, j = i){
+            char c = s.charAt(i);
+            if(c == ')')    stack.pop();
+            else if(c >= '0' && c <= '9' || c == '-'){
+                while(i + 1 < s.length() && s.charAt(i + 1) >= '0' && s.charAt(i + 1) <= '9') i++;
+                TreeNode currentNode = new TreeNode(Integer.valueOf(s.substring(j, i + 1)));
+                if(!stack.isEmpty()){
+                    TreeNode parent = stack.peek();
+                    if(parent.left != null)    parent.right = currentNode;
+                    else parent.left = currentNode;
+                }
+                stack.push(currentNode);
             }
-            preSum.put(sum, preSum.getOrDefault(sum,0) +1);
         }
-        return result;
+        return stack.isEmpty() ? null : stack.peek();
     }
 
 }
 
-public class SubarraySumK {
+public class BinaryTreeFromString {
     static public void main(String args[]) {
         int testIteration = 10;
         Input  utils = new Input();
         Solution sol = new Solution();
-
+        try {
+            List <String> lines = Files.readAllLines(Paths.get("hw3_input.txt"),StandardCharsets.UTF_8);
+            testIteration = lines.size();
         for (int i = 0; i < testIteration; i++) {
-            int[] input = utils.generateRandomArray(testIteration);
-            int k =  utils.generateRandomInt(testIteration);
-            int output = sol.subarraySum(input,k);
+            String input = lines.get(i);
+            TreeNode output = sol.str2tree(input);
             //print
-            utils.printArray(input);
-            System.out.println(k);
-            System.out.println(output);
+            System.out.println(input);
+            //System.out.println(output);
         }
+        } catch (IOException e) {
+            System.out.println("Unable to read file");
+            return;
+        }
+        
         System.out.println("Test executed without crashes, please manually verify input");
     }
 }

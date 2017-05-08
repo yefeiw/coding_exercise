@@ -1,13 +1,12 @@
 ####Only chance this line for the relevant HW code name
 HW=BinaryTreeFromString
 
-
-cd ../src
 #compile
-javac $HW.java ../../common/Input.java
-cp ../../common/*.class ./
-java $HW
+javac ../src/$HW.java ../../common/Input.java
+mv ../../common/*.class ./
+mv ../src/*.class ./
 #execute
+java $HW
 #cleanup
 rm *.class
-cd ../tst
+
