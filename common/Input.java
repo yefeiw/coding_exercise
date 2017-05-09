@@ -67,10 +67,27 @@ public class Input {
 		}
 		return ret;
 	}
+	//member functions to generate input.
+	public int[] generateRandomArray(int min,int max) {
+		int maxSize = max - min + 1;
+		int size = rand.nextInt(maxSize+1);
+		int[] ret = new int[size];//returning array of integer.
+		for (int i = 0; i < size; i++) {
+			ret[i] = min + rand.nextInt(max);
+		}
+		return ret;
+	}
 	public void printArray(int[] input) {
 		for(int i = 0; i < input.length; i++) {
 			if ( i > 0 ) System.out.print(",");
 			System.out.print(input[i]);
+		}
+		System.out.println();
+	}
+	public void printList(List<Integer> input) {
+		for(int i = 0; i < input.size(); i++) {
+			if ( i > 0 ) System.out.print(",");
+			System.out.print(input.get(i));
 		}
 		System.out.println();
 	}
@@ -214,4 +231,23 @@ public class Input {
 		}
 		return ret;
 	}
+	///////////////////  Tree-Related Code borrowed from HW
+	public TreeNode str2tree(String s) {
+        Stack<TreeNode> stack = new Stack<>();
+        for(int i = 0, j = i; i < s.length(); i++, j = i){
+            char c = s.charAt(i);
+            if(c == ')')    stack.pop();
+            else if(c >= '0' && c <= '9' || c == '-'){
+                while(i + 1 < s.length() && s.charAt(i + 1) >= '0' && s.charAt(i + 1) <= '9') i++;
+                TreeNode currentNode = new TreeNode(Integer.valueOf(s.substring(j, i + 1)));
+                if(!stack.isEmpty()){
+                    TreeNode parent = stack.peek();
+                    if(parent.left != null)    parent.right = currentNode;
+                    else parent.left = currentNode;
+                }
+                stack.push(currentNode);
+            }
+        }
+        return stack.isEmpty() ? null : stack.peek();
+    }
 }
