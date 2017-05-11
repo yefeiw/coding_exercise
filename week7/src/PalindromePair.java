@@ -36,6 +36,7 @@ class Solution {
                 }
                 if (isPalindrome(latter)) {
                     String index = new StringBuilder(former).reverse().toString();
+                    //If latter is empty, it is equivalent to former being empty, this is already covered
                     if (dict.containsKey(index) && dict.get(index) != i && latter.length() > 0) {
                         List<Integer> newAns = new ArrayList<Integer>();
                         newAns.add(i);
