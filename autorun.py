@@ -1,4 +1,4 @@
-# This script aims to automatically compile the latest modified file and compile it.
+# This script aims to automatically compile the latest modified file and run it.
 # The assumption is that the file must be of type java.
 import glob
 import os
