@@ -34,25 +34,25 @@ There are no key assumptions in this problem which you cannot resolve the proble
 Scan line: scan across the x-axis and find the maximum height in each x-axis. 
 Optimize where possible.
 
-## Would it work ideally? Would it work as-is?
+### Would it work ideally? Would it work as-is?
 It will functionally work but there are many apparent sub-optimizations.
 * It will functionally work because once you have identified the maximum height at each x-position, you will naturally get the skyline.
 * sub-optimizations:
  * need to search for the maximum height at each x-axis, O(n) per search where n is the number of buildings.
  * need to incrementally scan till the maximum x position. O(n) to known that position, O(x) to search where x is the maximum position
 
-### Proposed solution (where would optimization be possible)?
+## Proposed solution (where would optimization be possible)?
 * Optimize maximum search:
 	* Use max heap, O(1) to search for maximum, O(lg(n)) to insert or remove an element.
 * Optimize scan:
 	* skyline will only change at the boundaries, O(n) to find the max, but also O(2n) = O(n) to complete the search.
 
-### Data Structure Deployed:
+## Data Structure Deployed:
 * max heap as PriorityQueue, opitimized searching for max height
 * List as ArrayList, optimized management of edge points.
 
 
-### Code
+## Code
 
 [click here](https://github.com/yefeiw/coding_exercise/blob/master/week7/src/SkyLine.java)
 
@@ -65,13 +65,13 @@ It will functionally work but there are many apparent sub-optimizations.
 * Space O(n)
  * Bottleneck is to store the edges of each buildings in a sorted order. Intuitively that is O(n)
 
-### Other solutions:
+## Other solutions:
 
 * Hint: The proposed complexity is O(nlgn). Therefore, all binary-based algorithms are worth a try at this problem.
  * They are likely to be faster in real time since they do not require a sort before binary resolution. But it will be a little harder to read.
 [One such very nice example is here](https://discuss.leetcode.com/topic/56750/java-divide-and-conquer-solution-beats-96/2)
 
-### Possible Follow-ups:
+## Possible Follow-ups:
 This problem is so specific, I am not sure how we can change the description to form a meaningful follow-up. From solution-wise:
 * Supposed you have K computers, where K is comparable to the number of buildings. How would you then derive a faster solution?
 
