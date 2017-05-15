@@ -192,6 +192,7 @@ public class Input {
 		}
 		return ret;
 	}
+	
 	public int [][] generateRandomMatrix(int limit) {
 		int [][]ret = new int[rand.nextInt(limit)][rand.nextInt(limit)];
 		for (int i = 0; i < ret.length; i++) {
