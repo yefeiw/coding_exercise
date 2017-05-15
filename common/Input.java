@@ -27,6 +27,18 @@ class TreeNode {
       TreeNode left, right;
       TreeNode(int x) { val = x; }
  }
+ class Pair {
+ 	public int x;
+ 	public int y;
+ 	public Pair(int x, int y) { 
+ 		this.x = x;
+ 		this.y = y;
+ 	}
+ 	public boolean equals(Pair p) {
+ 		return (this.x == p.x) && (this.y == p.y);
+ 	}
+
+ }
 /////////////////////////////Utility Functions/////////////////////////  
 
 //package utils;
