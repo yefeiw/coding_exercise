@@ -50,14 +50,14 @@ Show Similar Problems
 
 ### strategy:
 * BFS
-	* Special handling of data advancement -> deterring DP as easy and readable solution.
+	* Special handling of data advancement -> deterring DP as an easy and readable solution.
 	* Ask for (one of the) shortest paths -> BFS seems more intuitive.
-	''' DFS will resolve this problem as long as BFS will. This is a personal preference'''
+		*DFS will resolve this problem as long as BFS will. This is a personal preference
 
 ### Would it work as-is? Would it have any obvious sub-optimizations?
 It will functionally work and there is no optimizations that will change the asymptotical complexity.
 * It will functionally work because it's a search algorithm solving a search problem.
-* Since it requires reaching the end point, in the worst case is not reachable exhauting all possible paths, there is no asymptotical optimization over the typical BFS algorithm.
+* Since it requires reaching the end point, in the worst case is not reachable exhausting all possible paths, there is no asymptotical optimization over the typical BFS algorithm.
 
 ## Proposed solution
 * Binary First Search:
