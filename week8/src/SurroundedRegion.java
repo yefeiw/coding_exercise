@@ -9,7 +9,7 @@ import java.io.IOException;
 // Notes:
 // Careless Mistakes one after another:
 // 1. Think at each line whether that input makes sense.
-// 2. Think when copying/pasting code what is the actual condition.
+// 2. Think when copying/pasting code what is the actual condistion
 
     if (board == null || board.length == 0 || board[0].length == 0) {
             return;
