@@ -21,12 +21,13 @@ try:
 	print src_java_paths
 	current_week = src_java_paths[1]
 	print current_week
+	sub_folder = src_java_paths[2] 
 	src_java_program = src_java_paths[-1].split('.')[0]
 	print src_java_program
 	util_java_file = './common/Input.java'
 	os.system('javac '+src_java_file+' ' +util_java_file)
 	os.system('mv ./common/*.class ./')
-	os.system('mv '+current_week+'/src/*.class ./')
+	os.system('mv '+current_week+'/'+sub_folder+'/*.class ./')
 	os.system('java '+src_java_program)
 except:
 	logging.error(traceback.print_exc())

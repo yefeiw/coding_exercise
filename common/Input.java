@@ -76,6 +76,7 @@ public class Input {
 		int[] ret = new int[size];//returning array of integer.
 		for (int i = 0; i < size; i++) {
 			ret[i] = -limit + 2* rand.nextInt(limit);
+			ret[i] = Math.abs(ret[i]);
 		}
 		return ret;
 	}
@@ -192,9 +193,19 @@ public class Input {
 		}
 		return ret;
 	}
+	public char [][] generateCharMatrix(int limit) {
+		char [][]ret = new char[rand.nextInt(limit)][rand.nextInt(limit)];
+		for (int i = 0; i < ret.length; i++) {
+			for (int j = 0; j < ret[0].length; j++) {
+					int seed = (rand.nextInt() % 2);
+				ret[i][j] = (seed == 0) ?'0':'1';
+			}
+		}
+		return ret;
+	}
 	
 	public int [][] generateRandomMatrix(int limit) {
-		int [][]ret = new int[rand.nextInt(limit)][rand.nextInt(limit)];
+		int [][]ret = new int[rand.nextInt(limit)+4][rand.nextInt(limit)+2];
 		for (int i = 0; i < ret.length; i++) {
 			for (int j = 0; j < ret[0].length; j++) {
 				ret[i][j] = (rand.nextInt() % limit);
