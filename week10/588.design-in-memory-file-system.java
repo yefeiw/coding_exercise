@@ -37,7 +37,16 @@ public class FileSystem {
         public Folder() {
             children = new Map<String, Node>();
         }
-        public List<
+        public List<String> getChildren() {
+            List<String> ret = new ArrayList<String>();
+            for (Node n : children) {
+                ret.add(n.name);
+            }
+            return ret;
+        }
+        public Node getChild(String key) {
+            return parent.children.get(key);
+        }
     }
     //state variables
     //root is always going to be a folder
@@ -49,7 +58,7 @@ public class FileSystem {
     
     public List<String> ls(String path) {
         String[] paths = path.split("/");
-        Node iter = root;
+        Folder iter = root;
         for(String path : paths) {
             iter = iter.getChild(path);
             if (iter == null) {
