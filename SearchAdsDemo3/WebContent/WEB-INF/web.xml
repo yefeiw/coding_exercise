@@ -7,22 +7,22 @@
 
 <context-param>
 <param-name>adsDataFilePath</param-name>
-<param-value>/Users/jiayangan/project/SearchAds/data/deduped/ads_0502.txt</param-value>
+<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/ads_0502.txt</param-value>
 </context-param>
 
 <context-param>
 <param-name>budgetDataFilePath</param-name>
-<param-value>/Users/jiayangan/project/SearchAds/data/deduped/budget.txt</param-value>
+<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/budget.txt</param-value>
 </context-param>
 
 <context-param>
 <param-name>uiTemplateFilePath</param-name>
-<param-value>/Users/jiayangan/project/SearchAds/ui.html</param-value>
+<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/ui.html</param-value>
 </context-param>
 
 <context-param>
 <param-name>adTemplateFilePath</param-name>
-<param-value>/Users/jiayangan/project/SearchAds/item.html</param-value>
+<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/item.html</param-value>
 </context-param>
 
 <context-param>
@@ -52,7 +52,7 @@
 
 <context-param>
 <param-name>mysqlPass</param-name>
-<param-value>bittiger2017</param-value>
+<param-value>root</param-value>
 </context-param>
 
 <servlet>
