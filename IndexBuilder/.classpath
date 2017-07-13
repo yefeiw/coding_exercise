@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/json-20160807.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/lucene-analyzers-common-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/lucene-core-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/lucene-queryparser-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/lucene-suggest-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/servlet-api-3.1.jar"/>
+	<classpathentry kind="lib" path="/home/vagrant/workspace/SearchAdsDemo3/javalib/spymemcached-2.12.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
