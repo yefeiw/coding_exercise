@@ -269,7 +269,6 @@ public class Crawler {
             //#customer_review-R188VC0CBW8NLR > div:nth-child(4) > span > div > div.a-expander-content.a-expander-partial-collapse-content
 
 
-
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
