@@ -79,6 +79,7 @@ public class IndexBuilder {
 	}
 
 	public Boolean buildInvertIndex(Ad ad) {
+		logger.log(Level.INFO, "building inverted index for " + ad.title);
 		String keyWords = Utility.strJoin(ad.keyWords, ",");
 		List<String> tokens = Utility.cleanedTokenize(keyWords);
 		for (int i = 0; i < tokens.size(); i++) {
@@ -98,8 +99,9 @@ public class IndexBuilder {
 	}
 
 	public Boolean buildForwardIndex(Ad ad) {
+		logger.log(Level.CONFIG, "building forward index for " + ad.title);
+
 		try {
-			logger.log(Level.CONFIG, "building forward index for " + ad.description);
 			mysql.addAdData(ad);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -146,15 +148,17 @@ public class IndexBuilder {
 				for (int j = 0; j < keyWords.length(); j++) {
 					ad.keyWords.add(keyWords.getString(j));
 				}
-
-				if (!buildInvertIndex(ad) || !buildForwardIndex(ad)) {
-					logger.log(Level.INFO, "nothing seems to have been built, continuing");
-					// log
+				
+				if (!buildInvertIndex(ad)) {
+					logger.log(Level.WARNING, "nothing seems to have been built, continuing");
+				}
+				
+				if (!buildForwardIndex(ad)) {
+					logger.log(Level.WARNING, "nothing seems to have been built, continuing");
 				}
 			}
 
 		} catch (IOException e) {
-			logger.log(Level.WARNING, "error occurred in execution");
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			e.printStackTrace();

@@ -128,6 +128,7 @@ public class MySQLAccess {
           } 
     	 
     	 if(isExist) {
+    		 System.out.println(ad.title+ " exists, returning");
     		 return;
     	 }
     	 
