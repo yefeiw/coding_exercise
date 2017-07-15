@@ -7,22 +7,12 @@
 
 <context-param>
 <param-name>adsDataFilePath</param-name>
-<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/ads_0502.txt</param-value>
+<param-value>/home/vagrant/workspace/IndexBuilder/configs/unittest.txt</param-value>
 </context-param>
 
 <context-param>
 <param-name>budgetDataFilePath</param-name>
-<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/budget.txt</param-value>
-</context-param>
-
-<context-param>
-<param-name>uiTemplateFilePath</param-name>
-<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/ui.html</param-value>
-</context-param>
-
-<context-param>
-<param-name>adTemplateFilePath</param-name>
-<param-value>/home/vagrant/workspace/SearchAdsDemo3/configs/item.html</param-value>
+<param-value>/home/vagrant/workspace/IndexBuilder/configs/budget.txt</param-value>
 </context-param>
 
 <context-param>
