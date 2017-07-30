@@ -16,17 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 //import io.bittiger.ads.AdsEngine;
 
 /**
- * Servlet implementation class SearchAdsApi
+ * Servlet implementation class IndexBuilderApi
  */
-@WebServlet("/SearchAds")
-public class SearchAdsApi extends HttpServlet {
+@WebServlet("/IndexBuilder")
+public class IndexBuilderApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IndexBuilder indexBuilder = null;
  
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAdsApi() {
+    public IndexBuilderApi() {
         super();
         // TODO Auto-generated constructor stub
     }

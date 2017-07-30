@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-<display-name>SearchAds</display-name>
+<display-name>IndexBuilder</display-name>
 <welcome-file-list>
     <welcome-file>index.html</welcome-file>
 </welcome-file-list>
@@ -46,13 +46,13 @@
 </context-param>
 
 <servlet>
-    <servlet-name>SearchAdsApi</servlet-name>
-    <servlet-class>io.bittiger.SearchAdsApi</servlet-class>
+    <servlet-name>IndexBuilderApi</servlet-name>
+    <servlet-class>io.bittiger.IndexBuilderApi</servlet-class>
 </servlet>
 
 <servlet-mapping>
-    <servlet-name>SearchAdsApi</servlet-name>
-    <url-pattern>/SearchAds</url-pattern>
+    <servlet-name>IndexBuilderApi</servlet-name>
+    <url-pattern>/IndexBuilder</url-pattern>
 </servlet-mapping>
 
 </web-app>
