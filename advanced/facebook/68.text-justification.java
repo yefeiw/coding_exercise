@@ -95,23 +95,31 @@ class Solution {
 	String format(List<String> input,int limit,boolean isEof) {
 		StringBuilder sb = new StringBuilder();
 		int curSize = 0;
+		int wordSize = 0;
 		for (String s : input) {
 			curSize += s.length() + 1;
+			wordSize += s.length();
 		}
-		
+		if (curSize > 0) curSize -= 1;
+
 		if (input.size() == 1|| isEof) {
-			for (String s : input) {
-				sb.append(s);
-				sb.append(' ');
+			for (int i = 0; i < input.size(); i++) {
+				if (i > 0) {
+					sb.append(' ');
+				}
+				sb.append(input.get(i));
+
 			}
-			for (int i = 0;i < limit - curSize; i++) {
+			for (int k = 0;k < limit - curSize; k++) {
+				System.out.println(limit+","+curSize);
 				sb.append(' ');
 			}
 			return sb.toString();
 		} else {
-			int numSpaces = limit - curSize;
+			int numSpaces = limit - wordSize;
 			int share = numSpaces / (input.size()-1);
 			int remainder = numSpaces % (input.size()-1);
+			System.out.printf("share is %d, remainder is %d\n",share,remainder);
 			for(int i = 0; i < input.size(); i++) {
 				if (i > 0) {
 					int spaces = share + ((remainder  >  0) ? 1 : 0);
