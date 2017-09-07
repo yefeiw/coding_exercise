@@ -61,14 +61,21 @@ public class NestedIterator implements Iterator<Integer> {
 
 	@Override
 	public Integer next() {
-		if(!hasNext()) return null;
-		while(true) {
-			NestedInteger top = stack.pop();
+		return stack.pop().getInteger();
+	}	
+
+	@Override
+	public boolean hasNext() {
+		while(!stack.isEmpty()) {
+			NestedInteger top = stack.getFirst();
 			if(top.isInteger()) {
-				//only break condition of while(1)
-				return top.getInteger();
+				return true;
 			} else {
+				//BUGWARNING:
+				//1. need to make sure we pop something here if top is not integer.
+				//2. Make sure the check for integer has to be in hasNext, not next
 				List<NestedInteger> list = top.getList();
+				stack.pop();
 				if(list.isEmpty()) {
 					continue;
 				}
@@ -77,11 +84,7 @@ public class NestedIterator implements Iterator<Integer> {
 				}
 			}
 		}
-	}
-
-	@Override
-	public boolean hasNext() {
-		return stack.isEmpty() ? false : true;
+		return false;
 	}
 }
 
