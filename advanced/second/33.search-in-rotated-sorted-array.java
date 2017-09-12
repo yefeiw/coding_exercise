@@ -21,6 +21,36 @@
  */
 class Solution {
     public int search(int[] nums, int target) {
-        
+        if (nums.length < 1) {
+        	return -1;
+        }
+        int start = 0;
+        int end = nums.length -1 ;
+        int ref = nums[end];
+        if (ref == target) return end;
+        while (start < end - 1) {
+        	int mid =  start + (end - start) / 2;
+        	int cand = nums[mid];
+        	if (cand < target) {
+        		//note: only a small subset of the condition will cause hte binary search to go the otherwise.
+        		//therefore, this condition judgement is enough
+        		if (cand < ref && target > ref) {
+        			end  = mid;
+        		} else {
+        			start =mid;
+        		}
+        	} else if (cand > target) {
+        		if (cand > ref && target < ref) {
+        			start = mid;
+        		} else {
+        			end = mid;
+        		}
+        	} else {
+        		return mid;
+        	}
+        }
+        if(nums[start] == target) return start;
+        if (nums[end] == target) return end;
+        return -1	;
     }
 }
