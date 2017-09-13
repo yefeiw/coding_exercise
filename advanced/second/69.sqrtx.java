@@ -15,6 +15,23 @@
  */
 class Solution {
     public int mySqrt(int x) {
-        
+        if (x < 0) {
+        	return -1;
+        } else if (x < 2) {
+        	return x;
+        }
+        int start = 1; int end = x;
+        while(start < end -1) {
+        	int mid = start + (end - start) / 2;
+        	if (x / mid < mid) {
+        		//mid * mid > x, mid is too large
+        		end = mid;
+        	} else {
+        		start  = mid;
+        	}
+        }
+        if (x / end >= end) {
+        	return end;
+        } else return start;
     }
 }
