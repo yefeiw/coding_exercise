@@ -1,0 +1,76 @@
+Sharing my straightforward C++ solution with O(n^2) time with explanation
+
+https://discuss.leetcode.com/topic/5806/sharing-my-straightforward-c-solution-with-o-n-2-time-with-explanation
+
+* Lang:  cpp
+* Votes: 20
+
+    int maximalRectangle(vector<vector<char> > &matrix) {
+        if(matrix.empty()){
+            return 0;
+        }
+        int maxRec = 0;
+        vector<int> height(matrix[0].size(), 0);
+        for(int i = 0; i < matrix.size(); i++){
+            for(int j = 0; j < matrix[0].size(); j++){
+                if(matrix[i][j] == '0'){
+                    height[j] = 0;
+                }
+                else{
+                    height[j]++;
+                }
+            }
+            maxRec = max(maxRec, largestRectangleArea(height));
+        }
+        return maxRec;
+    }
+    
+    int largestRectangleArea(vector<int> &height) {
+        stack<int> s;
+        height.push_back(0);
+        int maxSize = 0;
+        for(int i = 0; i < height.size(); i++){
+            if(s.empty() || height[i] >= height[s.top()]){
+                s.push(i);
+            }
+            else{
+                int temp = height[s.top()];
+                s.pop();
+                maxSize = max(maxSize, temp * (s.empty() ? i : i - 1 - s.top()));
+                i--;
+            }
+        }
+        return maxSize;
+    }
+
+In order to solve this problem, I use the solution from "Largest Rectangle in Histogram". 
+
+Now I assume you already know how to solve "Largest Rectangle in Histogram".
+
+We can regard a matrix as many histograms. For example, given a matrix below:
+
+1 0 1 0
+
+0 1 0 1
+
+0 1 1 0
+
+1 0 1 0
+
+1 0 1 1
+
+From top to bottom, we can find these histograms:
+
+Number 1: 1 0 1 0
+
+Number 2: 0 1 0 1
+
+Number 3: 0 2 1 0
+
+Number 4: 1 0 2 0
+
+Number 5: 2 0 3 1
+
+Pass all of these histograms to the function which can solve "Largest Rectangle in Histogram". And then find the maximum one. 
+
+Finally, we get the answer.
