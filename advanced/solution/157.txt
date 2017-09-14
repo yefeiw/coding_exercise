@@ -1,0 +1,17 @@
+AP Solution C++ 0ms 6lines
+
+https://discuss.leetcode.com/topic/26124/ap-solution-c-0ms-6lines
+
+* Lang:  cpp
+* Votes: 11
+
+    int read(char *buf, int n) {
+        int res = 0;
+        for(int i = 0, curr; i <= n/4 && curr != 0; i++){
+            curr = read4(buf + res);
+            res += curr;
+        }
+        return min(res, n);
+    }
+
+
