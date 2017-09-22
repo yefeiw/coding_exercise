@@ -39,6 +39,23 @@
  */
 class Solution {
     public boolean increasingTriplet(int[] nums) {
-        
+        //since there are only three numbers, find those three numbers.
+        if (nums.length < 3) {
+        	return false;
+        }
+        int firstMin = Integer.MAX_VALUE;
+        int secondMin = Integer.MAX_VALUE;
+        for(int i = 0; i < nums.length; i++) {
+        	if (nums[i] <= firstMin) {
+        		//key hint, firstMin < secondMin still holds!!!
+        		firstMin = nums[i];
+        	} else if (nums[i] <= secondMin) {
+        		secondMin = nums[i];
+        	} else {
+        		return true;
+        	}
+        }
+        //reaching here means nothing is found, and thus return false;
+        return false;
     }
 }
