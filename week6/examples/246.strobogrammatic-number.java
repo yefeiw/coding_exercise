@@ -17,6 +17,34 @@
  */
 class Solution {
     public boolean isStrobogrammatic(String num) {
-        
+       if (num.length() < 1) {
+         return true;
+       }
+       int start = 0;
+       int end = num.length() - 1;
+       while(start <= end) {
+         char left = num.charAt(start);
+         char right = num.charAt(end);
+         if (!isMatch(left,right)) {
+           return false;
+         }
+         start++;
+         end--;
+
+       }
+       return true;
+    }
+
+    private boolean isMatch(char a, char b) {
+      Map<Character,Character> map = new HashMap<>();
+      map.put('6','9');
+      map.put('9','6');
+      map.put('8','8');
+      map.put('1','1');
+      map.put('0','0');
+      if (!map.containsKey(a)) {
+        return false;
+      }
+      return (map.get(a) == b);
     }
 }
