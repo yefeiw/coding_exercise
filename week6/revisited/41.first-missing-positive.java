@@ -29,8 +29,11 @@ class Solution {
         while(i < nums.length) {
           //System.out.printf("i is %d, nums[i] is %d\n",i, nums[i]);
           //if A[i] != i+1` and A[A[i]-1] != A[i]
+          //BUG: we need to make sure that the first comparison is in the front.
           if (nums[i] != i+1 && nums[i] > 0 && nums[i] <= nums.length && nums[nums[i]-1] != nums[i]) {
             //swap
+            //BUG: Have done this multiple times, when there are nums[i] as index, we need to make sure that the
+            //     index is the last one changed.
             int temp  = nums[nums[i]-1];
             nums[nums[i]-1] = nums[i];
             nums[i] = temp;
