@@ -10,16 +10,16 @@
  * Testcase Example:  '"aa"\n"a"'
  *
  * Implement regular expression matching with support for '.' and '*'.
- * 
- * 
+ *
+ *
  * '.' Matches any single character.
  * '*' Matches zero or more of the preceding element.
- * 
+ *
  * The matching should cover the entire input string (not partial).
- * 
+ *
  * The function prototype should be:
  * bool isMatch(const char *s, const char *p)
- * 
+ *
  * Some examples:
  * isMatch("aa","a") → false
  * isMatch("aa","aa") → true
@@ -28,14 +28,10 @@
  * isMatch("aa", ".*") → true
  * isMatch("ab", ".*") → true
  * isMatch("aab", "c*a*b") → true
- * 
+ *
  */
 class Solution {
     public boolean isMatch(String s, String p) {
-        if (s.length() == 0 || p.length() == 0) {
-        	//TBD: visit it later
-        	return false;
-        }
         int m = s.length();
         int n = p.length();
         boolean dp[][] = new boolean[m+1][n+1];
@@ -50,11 +46,12 @@ class Solution {
         		if (s.charAt(i-1) == p.charAt(j-1)||p.charAt(j-1) =='.') {
         			dp[i][j] |= dp[i-1][j-1];
         		} else if (p.charAt(j-1) == '*') {
+              //zero occurences
+              dp[i][j] |= dp[i][j-2];
+              //for one or more occurences need to match first
         			if (s.charAt(i-1) == p.charAt(j-2)|| p.charAt(j-2) == '.') {
-        				dp[i][j] |= dp[i][j-2];
-        			} else if (dp[i-1][j] == true) dp[i][j] = true;
-        		} else {
-        			//do nothing	
+        				dp[i][j] |= dp[i-1][j];
+        			}
         		}
 
         	}
