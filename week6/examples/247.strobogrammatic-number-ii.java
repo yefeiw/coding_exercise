@@ -17,7 +17,7 @@
  *
  */
 class Solution {
-  private static final String[][] pairs = {{"0","0"},{"1","1"},{"6,9"},{"8","8"},{"9","6"}};
+  private static final String[][] pairs = {{"0","0"},{"1","1"},{"6","9"},{"8","8"},{"9","6"}};
     public List<String> findStrobogrammatic(int n) {
         return findStrobogrammatic(n,n);
     }
@@ -40,7 +40,7 @@ class Solution {
             continue;
           }
 
-          curr.add(p[0]+s+p[1]);
+          cur.add(p[0]+s+p[1]);
         }
       }
       return cur;
