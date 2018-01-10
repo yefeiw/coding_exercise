@@ -48,27 +48,27 @@ class Solution {
     public String complexNumberMultiply(String a, String b) {
         int[] numberA = decode(a);
         int[] numberB = decode(b);
-        int[] result = calculate(numberA, numberB);
+        int[] result = calculate(numberA,numberB);
         return encode(result);
     }
 
-    //util functions
-    int[] decode(String input) {
-        String[] operands = input.split("\\+");
+    public int[] decode(String input) {
+        String[] buf = input.split("\\+");
         int[] ret = new int[2];
-        ret[0] = Integer.parseInt(operands[0]);
-        ret[1] = Integer.parseInt(operands[1].substring(0,operands[1].length()-1));
+        ret[0] = Integer.parseInt(buf[0]);
+        ret[1] = Integer.parseInt(buf[1].substring(0,buf[1].length()-1));
         return ret;
     }
 
-    String encode(int[] input) {
+    public String encode(int[] input) {
         return Integer.toString(input[0])+"+"+Integer.toString(input[1])+"i";
     }
 
-    int[] calculate(int[] a, int[] b) {
+    public int[] calculate(int[] a, int[] b) {
         int[] ret = new int[2];
         ret[0] = a[0]*b[0] - a[1]*b[1];
-        ret[1] = a[0]*b[1] + a[1]*b[0];
+        ret[1] = a[1]*b[0] + a[0]*b[1];
+
         return ret;
     }
 }
