@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.json.*;
 
@@ -45,6 +46,7 @@ public class AdsEngine {
 				if(adJson.isNull("adId") || adJson.isNull("campaignId")) {
 					continue;
 				}
+				//update the relevant fields.
 				ad.adId = adJson.getLong("adId");
 				ad.campaignId = adJson.getLong("campaignId");
 				ad.brand = adJson.isNull("brand") ? "" : adJson.getString("brand");
@@ -56,6 +58,7 @@ public class AdsEngine {
 				ad.pClick = adJson.isNull("pClick") ? 0.0 : adJson.getDouble("pClick");
 				ad.category =  adJson.isNull("category") ? "" : adJson.getString("category");
 				ad.description = adJson.isNull("description") ? "" : adJson.getString("description");
+				//add the keywords. Notice here that there could be more than one keywords.
 				ad.keyWords = new ArrayList<String>();
 				JSONArray keyWords = adJson.isNull("keyWords") ? null :  adJson.getJSONArray("keyWords");
 				for(int j = 0; j < keyWords.length();j++)
@@ -65,7 +68,9 @@ public class AdsEngine {
 				
 				if(!indexBuilder.buildInvertIndex(ad) || !indexBuilder.buildForwardIndex(ad))
 				{
-					//log				
+					//log	
+					System.out.println("building index failed. Check database for fwd/bwd index information");
+					throw new NoSuchElementException();			
 				}
 			}
 
@@ -86,6 +91,8 @@ public class AdsEngine {
 				if(!indexBuilder.updateBudget(camp))
 				{
 					//log
+					System.out.print("Budget updating failed, bailing out");
+					throw new NoSuchElementException();
 				}			
 			}
 		}catch (IOException e) {
@@ -117,7 +124,7 @@ public class AdsEngine {
 		System.out.println("AdsCampaignManager ads left = " + ads.size());
 
 		//allocation
-		//AdsAllocation.getInstance().AllocateAds(ads);
+		AdsAllocation.getInstance().AllocateAds(ads);
 		return ads;
 	}
 }
