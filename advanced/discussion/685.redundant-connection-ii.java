@@ -56,6 +56,54 @@
  */
 class Solution {
     public int[] findRedundantDirectedConnection(int[][] edges) {
+        //ideas learned from https://leetcode.com/problems/redundant-connection-ii/discuss/108045/C++Java-Union-Find-with-explanation-O(n)
         
+        //two candidates. N vertex with N edges -> at most one solution.
+        int[] cand1 = {-1,-1};
+        int[] cand2 = {-1,-1};
+
+       int[] parent = new int[edges.length+1];
+       //1, detect if there is any node with two parents.
+       for (int[] edge : edges) {
+           if (parent[edge[1]] == 0) {
+               parent[edge[1]] = edge[0];
+           } else {
+               cand1 = new int[] {parent[edge[1]],edge[1]};
+               cand2 = new int[] {edge[0], edge[1]};
+               edge[1] = 0;
+           }
+       }
+
+       //2. Do a normal union find anyway to detect problems.
+       for (int i = 0; i < parent.length; i++) {
+           parent[i] = i;
+       }
+
+       for (int[] edge : edges) {
+           if (edge[1] == 0) {
+               //marked invalid, continue;
+               continue;
+           }
+           int father = edge[0];
+           int child = edge[1];
+           if (find(parent,father) == child) {
+               //there is a loop.
+               if (cand1[0] == -1) {
+                   return edge;
+               } else {
+                   return cand1;
+               }
+           }
+           parent[child] = father;
+       }
+       return cand2;
+    }
+
+    //util functions
+    private int find(int[] parent, int input) {
+        if (parent[input]!= input) {
+            parent[input] = find(parent, parent[input]);
+        }
+        return parent[input];
     }
 }
