@@ -63,11 +63,13 @@ class Solution {
         int[] cand2 = {-1,-1};
 
        int[] parent = new int[edges.length+1];
+       // The only thing special about this is the possibility to have one node with two parents.
        //1, detect if there is any node with two parents.
        for (int[] edge : edges) {
            if (parent[edge[1]] == 0) {
                parent[edge[1]] = edge[0];
            } else {
+               //reaching here means parent[edge[1]] is already defined.
                cand1 = new int[] {parent[edge[1]],edge[1]};
                cand2 = new int[] {edge[0], edge[1]};
                edge[1] = 0;
@@ -75,12 +77,18 @@ class Solution {
        }
 
        //2. Do a normal union find anyway to detect problems.
+       // It covers all three possibilities.
+       // a. normal 
+       // b. cycle but no double-parenting
+       // c. cycle with double parenting, but with right guess.
+       // Then, if the normal union find fails, it only means the guess is wrong.
        for (int i = 0; i < parent.length; i++) {
            parent[i] = i;
        }
 
        for (int[] edge : edges) {
            if (edge[1] == 0) {
+               // this is the previously removed.
                //marked invalid, continue;
                continue;
            }
@@ -91,11 +99,13 @@ class Solution {
                if (cand1[0] == -1) {
                    return edge;
                } else {
+                   //after removing cand2, there is still a cycle. guess of cand 2 is wrong, return cand1.
                    return cand1;
                }
            }
            parent[child] = father;
        }
+       //after removing cand2, there is no cycles, guess of cand2 is right, return cand2.
        return cand2;
     }
 
