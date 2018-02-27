@@ -8,7 +8,7 @@ Better late than never.
 
 The answers to many coding exercies on [LeetCode](http://www.leetcode.com) is avilable here. I might plan to write a gitbook based on my own understanding sometimes, but probably not soon.
 
-I am trying to work on the company tabs, to prove that I doprepare myself for the job, and also for better programming skills. If you happened to be seeking jobs in a similar field. Feel free to comment on the code or ask questions. If I help you improve, I help myself improve.
+I am trying to work on the company tabs, to prove that I do prepare myself for the job, and also for better programming skills. If you happened to be seeking jobs in a similar field. Feel free to comment on the code or ask questions. If I help you improve, I help myself improve.
 
 
 ## Table of Contents
