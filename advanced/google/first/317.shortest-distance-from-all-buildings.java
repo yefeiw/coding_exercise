@@ -1,3 +1,5 @@
+import java.util.Deque;
+
 /*
  * [317] Shortest Distance from All Buildings
  *
@@ -44,12 +46,58 @@
  * 
  */
 class Solution {
-    class Pair{
-       public int first;
-       public int second;
-    }
     public int shortestDistance(int[][] grid) {
-        List<Pair> buildings =  new ArrayList<>();
+            if (grid.length == 0 || grid[0].length == 0) {
+                return 0;
+            }
+            int m = grid.length;
+            int n = grid[0].length;
+            int[][] numReachedBuildings = new int[m][n];
+            int[][] totalDistance = new int[m][n];
+            int cnt = 0;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == 1) {
+                        //here we have found a building
+                        cnt++;
+                        bfs(i, j, grid, numReachedBuildings, totalDistance, cnt);
+                    }
+                }
+            }
+            //After updating all distances, trying to see which grid is the one that is reachable to all buildings while having the shortest distance.
+            int result = Integer.MAX_VALUE;
+            for (int i = 0; i < m ; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == 0 && numReachedBuildings[i][j] == cnt) {
+                        result = Math.min(result, totalDistance[i][j]);
+                    }
+                }
+            }
 
+            return (result == Integer.MAX_VALUE) ? -1 : result;
+    }
+
+    private void bfs(int startI, int startJ, int[][] grid,  int[][] numReachedBuildings, int[][] totalDistance, int cnt) {
+        final int[][] deltas = new int[][]{{0,1},{0,-1}, {1,0}, {-1,0}};
+        int step = 0;
+        int m = grid.length, n = grid[0].length;
+        Deque<Integer[]> queue = new ArrayDeque<>();
+        queue.offer(new Integer[]{startI, startJ});
+        while (!queue.isEmpty()) {
+            step++;
+            int size = queue.size();
+            for (int i = 0;i < size; i++) {
+                Integer[] front = queue.remove();
+                for (int[] delta : deltas) {
+                    Integer[] cand = new Integer[]{front[0]+delta[0], front[1]+ delta[1]};
+                    if (cand[0] < 0 || cand[0] >= m || cand[1] < 0 || cand[1] >= n || grid[cand[0]][cand[1]] != 0 || numReachedBuildings[cand[0]][cand[1]] != cnt -1) {
+                        continue;
+                    }
+                    numReachedBuildings[cand[0]][cand[1]]++;
+                    totalDistance[cand[0]][cand[1]] += step;
+                    queue.add(cand);
+                }
+            }
+        }
     }
 }
