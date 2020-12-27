@@ -68,6 +68,26 @@
  */
 class Solution {
     public boolean isValid(String s) {
-        
+       Deque<Character> stack = new ArrayDeque<>();
+       Map<Character, Character> ridx = Map.of(
+           ')', '(',
+           ']', '[',
+           '}', '{'
+       );
+       for (int i = 0; i < s.length(); i++) {
+           char c = s.charAt(i);
+           if (!ridx.containsKey(c)) {
+               stack.addFirst(c);
+           } else {
+               if (stack.isEmpty()) {
+                   return false;
+               }
+               if (stack.peekFirst() != ridx.get(c)) {
+                   return false;
+               }
+               stack.removeFirst();
+           }
+       }
+       return (stack.isEmpty());
     }
 }
