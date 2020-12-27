@@ -71,6 +71,30 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        
+        return helper(lists, 0, lists.length - 1);
+    }
+    private ListNode helper(ListNode[] lists, int start, int end) {
+        if (start > end) {
+            return null;
+        } else if (start == end) {
+            return lists[start];
+        } else  {
+            int mid = start + (end - start) / 2;
+            ListNode left = helper(lists, start, mid);
+            ListNode right = helper(lists, mid + 1, end);
+            return mergeTwoLists(left, right);
+        }
+    }
+
+    private ListNode mergeTwoLists(ListNode left, ListNode right) {
+        if (left == null) return right;
+        if (right == null) return left;
+        ListNode head = (left.val < right.val) ? left : right;
+        if (left.val < right.val) {
+            head.next = mergeTwoLists(left.next, right);
+        } else  {
+            head.next = mergeTwoLists(left, right.next);
+        }
+        return head;
     }
 }

@@ -51,6 +51,19 @@
  */
 class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
-        
+       return helper(nums, 0, nums.length-1); 
+    }
+    private TreeNode helper(int[] nums, int start, int end) {
+        if (start > end) {
+            return null;
+        } else if (start == end) {
+            return new TreeNode(nums[start]);
+        } else {
+            int mid = start + (end - start) / 2;
+            TreeNode ret = new TreeNode(nums[mid]);
+            ret.left = helper(nums, start, mid - 1);
+            ret.right = helper(nums, mid + 1, end);
+            return ret;
+        }
     }
 }
