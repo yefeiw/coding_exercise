@@ -97,7 +97,30 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        
+        if (headA == null || headB == null) return null;
+        ListNode pA = headA;
+        ListNode pB = headB;
+        boolean endA = false;
+        boolean endB = false;
+        while(true) {
+            if (pA == null) {
+                if (endA == false) {
+                    pA = headB;
+                    endA = true;
+                } else return null;
+            }
+            if (pB == null) {
+                if (endB == false) {
+                    pB = headA;
+                    endB = true;
+                } else return null;
+            }
+            if (pA == pB) {
+                return pA;
+            }
+            pA = pA.next;
+            pB = pB.next;
+        }
     }
 }
 // @lc code=end

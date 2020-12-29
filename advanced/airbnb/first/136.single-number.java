@@ -45,7 +45,11 @@
 // @lc code=start
 class Solution {
     public int singleNumber(int[] nums) {
-        
+       int buffer = 0;
+       for (int num  : nums) {
+           buffer = buffer ^ num;
+       }
+       return buffer;
     }
 }
 // @lc code=end
