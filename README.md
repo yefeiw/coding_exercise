@@ -22,6 +22,9 @@ These are java related problems in BitTiger course CS504. Reading them gives you
 * Springboot WebApps
 * Web Crawlers
 * Util Libs such as RabbitMQ, Lucene, etc.
+### [Miniprojects](https://github.com/yefeiw/coding_exercise/tree/master/miniprojects)
+Small, focused projects demonstrating specific programming concepts and algorithms.
+* **linux_file_path**: Linux cd command simulation with enhanced features and shell-like wrapper class.
 
 
 ## How to reach me
