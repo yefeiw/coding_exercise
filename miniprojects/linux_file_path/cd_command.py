@@ -1,3 +1,106 @@
+class CDWrapper:
+    """
+    Wrapper class for the cd command that maintains state and provides default parameters.
+    
+    Similar to how a shell handles cd command with implicit context.
+    """
+    
+    def __init__(self, current_dir: str = None, home: str = None, symlink_map: dict = None):
+        """
+        Initialize the CD wrapper with smart default parameters.
+        
+        Args:
+            current_dir: Initial current working directory (default: "/")
+            home: Default home directory for ~ expansion (default: "/home/user")
+            symlink_map: Default symlink mapping (default: empty dict)
+        """
+        # Default current directory to root if not provided
+        self.current_dir = current_dir if current_dir is not None else "/"
+        # Ensure current_dir is absolute
+        if not self.current_dir.startswith('/'):
+            self.current_dir = "/" + self.current_dir
+        
+        # Default home directory to /home/user if not provided
+        self.home = home if home is not None else "/home/user"
+        # Ensure home is absolute
+        if not self.home.startswith('/'):
+            self.home = "/" + self.home
+        
+        # Default symlink map to empty dict
+        self.symlink_map = symlink_map if symlink_map is not None else {}
+    
+    def cd(self, dest: str) -> 'CDWrapper':
+        """
+        Change directory using the maintained state.
+        
+        Args:
+            dest: Destination path (relative or absolute)
+            
+        Returns:
+            Self for method chaining
+        """
+        self.current_dir = cd(self.current_dir, dest, self.home, self.symlink_map)
+        return self
+    
+    def pwd(self) -> str:
+        """Return current working directory (pwd command equivalent)."""
+        return self.current_dir
+    
+    def set_home(self, home: str) -> 'CDWrapper':
+        """Update the home directory.
+        
+        Args:
+            home: New home directory path
+            
+        Returns:
+            Self for method chaining
+        """
+        self.home = home
+        return self
+    
+    def set_symlink_map(self, symlink_map: dict) -> 'CDWrapper':
+        """Update the symlink mapping.
+        
+        Args:
+            symlink_map: New symlink mapping dictionary
+            
+        Returns:
+            Self for method chaining
+        """
+        self.symlink_map = symlink_map
+        return self
+    
+    def add_symlink(self, link_path: str, real_path: str) -> 'CDWrapper':
+        """Add a single symlink to the symlink map.
+        
+        Args:
+            link_path: Symlink path
+            real_path: Real path the symlink points to
+            
+        Returns:
+            Self for method chaining
+        """
+        self.symlink_map[link_path] = real_path
+        return self
+    
+    def remove_symlink(self, link_path: str) -> 'CDWrapper':
+        """Remove a symlink from the symlink map.
+        
+        Args:
+            link_path: Symlink path to remove
+            
+        Returns:
+            Self for method chaining
+        """
+        if link_path in self.symlink_map:
+            del self.symlink_map[link_path]
+        return self
+    
+    def __repr__(self) -> str:
+        """String representation of the CDWrapper instance."""
+        return f"CDWrapper(current_dir='{self.current_dir}', home='{self.home}', symlink_map={self.symlink_map})"
+
+
 def cd(current_dir: str, dest: str, home: str = None, symlink_map: dict = None) -> str:
     """
     Simulate Linux cd command with path simplification, ~ expansion, and optional symlink resolution.
@@ -300,3 +403,83 @@ if __name__ == "__main__":
     
     print()
     print("=" * 60)
+
+
+# Example usage of enhanced CDWrapper (simulating shell-like behavior)
+print("\n" + "=" * 60)
+print("        CDWRAPPER ENHANCED EXAMPLE")
+print("=" * 60)
+
+# Example 1: Default parameters
+print("1. CDWrapper with default parameters:")
+print("-" * 50)
+cd_shell_default = CDWrapper()
+print(f"Default current_dir: {cd_shell_default.pwd()}")
+print(f"Default home: {cd_shell_default.home}")
+print(f"Default symlink_map: {cd_shell_default.symlink_map}")
+
+print()
+
+# Example 2: Custom configuration
+print("2. CDWrapper with custom configuration:")
+print("-" * 50)
+cd_shell = CDWrapper(
+    current_dir="/home/user/docs",
+    home="/home/user",
+    symlink_map={"/home/user/docs": "/var/www/html", "/var/www": "/srv/http"}
+)
+
+print(f"Initial directory: {cd_shell.pwd()}")
+print(f"Home directory: {cd_shell.home}")
+print(f"Symlink map: {cd_shell.symlink_map}")
+
+# Example 3: Method chaining
+print()
+print("3. Method chaining example:")
+print("-" * 50)
+cd_shell2 = CDWrapper(current_dir="/home/user")
+result = cd_shell2.cd("docs").cd("../downloads").cd("projects")
+print(f"Chained cd commands: {result.pwd()}")
+
+# Example 4: Enhanced shell-like behavior
+print()
+print("4. Shell-like cd commands with pwd:")
+print("-" * 50)
+cd_shell3 = CDWrapper(
+    current_dir="/home/user/docs",
+    home="/home/user",
+    symlink_map={"/home/user/docs": "/var/www/html", "/var/www": "/srv/http"}
+)
+
+print(f"pwd -> {cd_shell3.pwd()}")
+cd_shell3.cd("../downloads")
+print(f"cd ../downloads && pwd -> {cd_shell3.pwd()}")
+cd_shell3.cd("~/.config")
+print(f"cd ~/.config && pwd -> {cd_shell3.pwd()}")
+cd_shell3.cd("/var/www/html")
+print(f"cd /var/www/html && pwd -> {cd_shell3.pwd()}")  # Resolves symlinks
+cd_shell3.cd("../css/styles")
+print(f"cd ../css/styles && pwd -> {cd_shell3.pwd()}")
+cd_shell3.cd("~")
+print(f"cd ~ && pwd -> {cd_shell3.pwd()}")
+
+# Example 5: Symlink management
+print()
+print("5. Symlink management:")
+print("-" * 50)
+cd_shell4 = CDWrapper(current_dir="/home/user")
+# Add symlinks using method chaining
+cd_shell4.add_symlink("/home/user/app", "/opt/myapp").add_symlink("/opt/myapp/config", "/etc/myapp")
+print(f"Added symlinks: {cd_shell4.symlink_map}")
+cd_shell4.cd("/home/user/app/config")
+print(f"cd /home/user/app/config -> {cd_shell4.pwd()}")
+
+# Example 6: String representation
+print()
+print("6. String representation:")
+print("-" * 50)
+cd_shell5 = CDWrapper(current_dir="/home/user", symlink_map={"/home/user": "/mnt/user"})
+print(f"CDWrapper instance: {cd_shell5}")
+
+print()
+print("=" * 60)
