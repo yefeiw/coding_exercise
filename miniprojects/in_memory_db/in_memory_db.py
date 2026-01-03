@@ -1,3 +1,4 @@
+from typing import List, Dict, Any, Tuple, Union, Optional
 import logging
 from datetime import datetime
 
@@ -9,7 +10,7 @@ class Database:
     def __init__(self):
         self.tables = {}
     
-    def create_table(self, name: str, columns: list[str]) -> None:
+    def create_table(self, name: str, columns: List[str]) -> None:
         logger.info(f"Creating table '{name}' with columns: {columns}")
         if name in self.tables:
             logger.error(f"Table '{name}' already exists")
@@ -34,12 +35,12 @@ class Database:
         return self.tables[name]
 
 class Table:
-    def __init__(self, name: str, columns: list[str]):
+    def __init__(self, name: str, columns: List[str]):
         self.name = name
         self.columns = columns
         self.rows = []
     
-    def insert(self, row: dict[str, any]) -> None:
+    def insert(self, row: Dict[str, Any]) -> None:
         logger.info(f"Inserting row into table '{self.name}': {row}")
         missing_columns = [col for col in self.columns if col not in row]
         if missing_columns:
@@ -50,7 +51,7 @@ class Table:
         logger.info(f"Successfully inserted row into table '{self.name}': {filtered_row}")
         logger.info(f"Table '{self.name}' now has {len(self.rows)} rows")
     
-    def select(self, columns: list[str] = None, where: dict | list[tuple] = None) -> list[dict[str, any]]:
+    def select(self, columns: List[str] = None, where: Union[Dict, List[Tuple]] = None) -> List[Dict[str, Any]]:
         logger.info(f"Selecting from table '{self.name}' with columns: {columns}, where: {where}")
         selected_columns = columns if columns else self.columns
         invalid_columns = [col for col in selected_columns if col not in self.columns]

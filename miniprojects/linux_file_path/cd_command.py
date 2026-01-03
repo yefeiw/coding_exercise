@@ -159,22 +159,35 @@ def cd(current_dir: str, dest: str, home: str = None, symlink_map: dict = None) 
         resolved_path = simplified_logical_path
         
         # Keep resolving until no more symlinks are found
-        resolved = False
-        while not resolved:
-            resolved = True  # Assume no more symlinks unless we find one
+        # We need to restart the resolution process from the beginning of the path
+        # whenever a substitution happens, to handle nested symlinks correctly.
+        # But we also need to be careful about infinite loops.
+        max_iterations = 100
+        iteration = 0
+        
+        while iteration < max_iterations:
+            iteration += 1
+            best_match = None
+            best_match_len = 0
             
-            # Check for longest matching prefix in symlink_map (sort by length descending)
-            for link_path, real_path in sorted(symlink_map.items(), key=lambda x: len(x[0]), reverse=True):
-                if resolved_path == link_path:
-                    # Exact match - replace entire path
+            # Check for longest matching prefix in symlink_map
+            # We must iterate through ALL keys to find the absolute longest match
+            for link_path, real_path in symlink_map.items():
+                if resolved_path == link_path or resolved_path.startswith(f"{link_path}/"):
+                    if len(link_path) > best_match_len:
+                        best_match = link_path
+                        best_match_len = len(link_path)
+            
+            if best_match:
+                real_path = symlink_map[best_match]
+                if resolved_path == best_match:
                     resolved_path = real_path
-                    resolved = False
-                    break
-                elif resolved_path.startswith(f"{link_path}/"):
-                    # Partial match - replace prefix
-                    resolved_path = real_path + resolved_path[len(link_path):]
-                    resolved = False
-                    break
+                else:
+                    # resolved_path starts with best_match + "/"
+                    resolved_path = real_path + resolved_path[len(best_match):]
+            else:
+                # No symlink found in the path
+                break
         
         # Update with resolved path
         simplified_logical_path = resolved_path
@@ -327,7 +340,7 @@ if __name__ == "__main__":
     run_test(
         "Multiple symlinks with overlapping paths",
         "/long/path/link/nested",
-        "../file.txt",
+        "./file.txt",
         "/real/nested/file.txt",
         symlink_map={
             "/long/path/link": "/real/long",

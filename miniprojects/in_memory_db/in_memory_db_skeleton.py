@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from typing import Any
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -95,7 +96,7 @@ class Table:
                 results.append({col : row[col] for col in columns})
         return results
     
-    def join(self, other_table: 'Table', on: tuple[str, str], join_type: str = "inner") -> list[dict[str, any]]:
+    def join(self, other_table: 'Table', on: tuple[str, str], join_type: str = "inner") -> list[dict[str, Any]]:
         # TODO: Join this table with another table
         # Support inner, left, right, full joins
         # Handle column name conflicts
